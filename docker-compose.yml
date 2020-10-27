@@ -1,0 +1,26 @@
+version: "3.4"
+services:
+  haproxy:
+    container_name: "haproxy"
+    #image: teamwork/haproxy:dev-env
+    restart: unless-stopped
+    #healthcheck:
+    #  test: "curl localhost:8080"
+    environment:
+      DB_MASTER: "teamworkpm_master"
+    ports:
+      - "90:80"
+    build:
+      context: ./haproxy/
+
+  php:
+    container_name: "php"
+    restart: unless-stopped
+    #healthcheck:
+    #  test: "curl localhost:8080"
+    environment:
+      USERNAME: "bob"
+    ports:
+      - "8080:80"
+    build:
+      context: ./php/
