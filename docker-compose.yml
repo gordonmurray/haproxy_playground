@@ -9,22 +9,34 @@ services:
     environment:
       DB_MASTER: "teamworkpm_master"
     ports:
-      - "90:80"
+      - "80:80"
       - "8877:8877"
     build:
       context: ./haproxy/
 
-  php:
-    container_name: "php"
+  php1:
+    container_name: "php1"
     restart: unless-stopped
     #healthcheck:
     #  test: "curl localhost:8080"
     environment:
       USERNAME: "bob"
     ports:
-      - "8080:80"
+      - "8081:81"
     build:
-      context: ./php/
+      context: ./php1/
+
+  php2:
+    container_name: "php2"
+    restart: unless-stopped
+    #healthcheck:
+    #  test: "curl localhost:8080"
+    environment:
+      USERNAME: "fred"
+    ports:
+      - "8082:82"
+    build:
+      context: ./php2/      
 
 networks:
   default:
