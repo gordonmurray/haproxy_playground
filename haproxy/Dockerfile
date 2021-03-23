@@ -1,11 +1,7 @@
-FROM ubuntu:20.04
-
-RUN apt update && \
-    apt install software-properties-common -y && \
-    add-apt-repository ppa:vbernat/haproxy-2.1 && \
-    apt update -yqq && \
-    apt install haproxy=2.0.\* -y
+FROM haproxy:2.0
 
 EXPOSE 80
+EXPOSE 443
+EXPOSE 8877
 
-#COPY haproxy.cfg  /etc/haproxy/haproxy.cfg
+COPY haproxy.cfg  /usr/local/etc/haproxy/haproxy.cfg
