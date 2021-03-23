@@ -10,6 +10,7 @@ services:
       DB_MASTER: "teamworkpm_master"
     ports:
       - "90:80"
+      - "8877:8877"
     build:
       context: ./haproxy/
 
@@ -24,3 +25,8 @@ services:
       - "8080:80"
     build:
       context: ./php/
+
+networks:
+  default:
+    external:
+      name: haproxy
